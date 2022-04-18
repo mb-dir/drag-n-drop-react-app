@@ -1,4 +1,4 @@
-export default (data = {
+const data = {
   elements: [
     {
       title: "Stage 1",
@@ -19,4 +19,5 @@ export default (data = {
         "Mauris nec luctus nisi, sed commodo metus. Suspendisse ullamcorper, libero ut convallis dignissim, velit ipsum pharetra ex, fermentum euismod neque orci in eros",
     },
   ],
-});
+};
+export default data;
