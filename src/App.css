@@ -9,3 +9,19 @@
   width: 30%;
   min-height: 500px;
 }
+.element {
+  border: 3px solid rgb(0, 71, 115);
+  width: 90%;
+  margin: 10px auto;
+}
+.element:hover {
+  cursor: pointer;
+}
+.element__title {
+  margin: 0;
+}
+.element__date {
+  margin: 0;
+  font-size: 12px;
+  color: rgb(203, 203, 203);
+}
