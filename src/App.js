@@ -49,6 +49,30 @@ function App() {
     setTransferedElement(null);
   }
 
+  function transferToSt() {
+    //Delete transfered item from 2nd container
+    setNdData(prevElements => {
+      return prevElements.filter(el => el.id !== transferedElement.id);
+    });
+    //Add transfered item to 1st container
+    setStData(prevElements => {
+      //Block to multiply item if droped in the same container
+      let doesElementAlreadyExist = false;
+      prevElements.forEach(el => {
+        if (el.id === transferedElement.id) {
+          doesElementAlreadyExist = true;
+        }
+      });
+      if (doesElementAlreadyExist) {
+        return [ ...prevElements ];
+      } else {
+        return [ ...prevElements, transferedElement ];
+      }
+    });
+    //Reset transfered element
+    setTransferedElement(null);
+  }
+
   const stElement = stData.map(el => {
     return (
       <div
@@ -87,7 +111,9 @@ function App() {
       <main className="dragApp">
         <section className="dragApp__wrapper">
           <h2 className="dragApp__title">1st container</h2>
-          <div className="dragApp__container">{stElement}</div>
+          <div className="dragApp__container" onDrop={transferToSt}>
+            {stElement}
+          </div>
         </section>
         <section className="dragApp__wrapper">
           <h2 className="dragApp__title">2st container</h2>
