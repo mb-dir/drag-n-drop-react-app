@@ -4,6 +4,7 @@ import data from "./data.js";
 
 function App() {
   const [ stData, setStData ] = React.useState(data.elements);
+  const [ transferedElement, setTransferedElement ] = React.useState(null);
 
   //Allow to drop - you need to prevent default action of "dragover" event to that moveing items was possible
   const allowTransfer = event => {
@@ -19,9 +20,18 @@ function App() {
     };
   }, []);
 
+  function getDraggedElement(el) {
+    setTransferedElement(el);
+  }
+
   const stElement = stData.map(el => {
     return (
-      <div key={el.id} draggable="true" className="element">
+      <div
+        key={el.id}
+        draggable="true"
+        className="element"
+        onDragStart={() => getDraggedElement(el)}
+      >
         <h3 className="element__title">{el.title}</h3>
         <p className="element__date">{el.date}</p>
         <p className="element__description">{el.description}</p>
