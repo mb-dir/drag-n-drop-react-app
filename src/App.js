@@ -5,9 +5,23 @@ import data from "./data.js";
 function App() {
   const [ stData, setStData ] = React.useState(data.elements);
 
+  //Allow to drop - you need to prevent default action of "dragover" event to that moveing items was possible
+  const allowTransfer = event => {
+    event.preventDefault();
+  };
+  //I followed this code - https://www.pluralsight.com/guides/event-listeners-in-react-components
+  React.useEffect(() => {
+    document.addEventListener("dragover", allowTransfer);
+
+    // cleanup this component
+    return () => {
+      document.removeEventListener("dragover", allowTransfer);
+    };
+  }, []);
+
   const stElement = stData.map(el => {
     return (
-      <div key={el.id} className="element">
+      <div key={el.id} draggable="true" className="element">
         <h3 className="element__title">{el.title}</h3>
         <p className="element__date">{el.date}</p>
         <p className="element__description">{el.description}</p>
