@@ -4,6 +4,7 @@ import data from "./data.js";
 
 function App() {
   const [ stData, setStData ] = React.useState(data.elements);
+  const [ ndData, setNdData ] = React.useState([]);
   const [ transferedElement, setTransferedElement ] = React.useState(null);
 
   //Allow to drop - you need to prevent default action of "dragover" event to that moveing items was possible
@@ -24,7 +25,35 @@ function App() {
     setTransferedElement(el);
   }
 
+  function transferToNd() {
+    //Delete transfered item from 1st container
+    setStData(prevElements => {
+      return prevElements.filter(el => el.id !== transferedElement.id);
+    });
+    //Add transfered item to 2nd container
+    setNdData(prevElements => {
+      return [ ...prevElements, transferedElement ];
+    });
+    //Reset transfered element
+    setTransferedElement(null);
+  }
+
   const stElement = stData.map(el => {
+    return (
+      <div
+        key={el.id}
+        draggable="true"
+        className="element"
+        onDragStart={() => getDraggedElement(el)}
+      >
+        <h3 className="element__title">{el.title}</h3>
+        <p className="element__date">{el.date}</p>
+        <p className="element__description">{el.description}</p>
+      </div>
+    );
+  });
+
+  const ndElement = ndData.map(el => {
     return (
       <div
         key={el.id}
@@ -51,7 +80,9 @@ function App() {
         </section>
         <section className="dragApp__wrapper">
           <h2 className="dragApp__title">2st container</h2>
-          <div className="dragApp__container" />
+          <div className="dragApp__container" onDrop={transferToNd}>
+            {ndElement}
+          </div>
         </section>
       </main>
     </div>

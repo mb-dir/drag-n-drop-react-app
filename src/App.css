@@ -9,6 +9,9 @@
   width: 30%;
   min-height: 500px;
 }
+.dragApp__container {
+  min-height: 400px;
+}
 .element {
   border: 3px solid rgb(0, 71, 115);
   width: 90%;
