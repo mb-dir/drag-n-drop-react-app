@@ -7,7 +7,7 @@ function App() {
 
   const stElement = stData.map(el => {
     return (
-      <div className="element">
+      <div key={el.id} className="element">
         <h3 className="element__title">{el.title}</h3>
         <p className="element__date">{el.date}</p>
         <p className="element__description">{el.description}</p>
