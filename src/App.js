@@ -32,7 +32,18 @@ function App() {
     });
     //Add transfered item to 2nd container
     setNdData(prevElements => {
-      return [ ...prevElements, transferedElement ];
+      //Block to multiply item if droped in the same container
+      let doesElementAlreadyExist = false;
+      prevElements.forEach(el => {
+        if (el.id === transferedElement.id) {
+          doesElementAlreadyExist = true;
+        }
+      });
+      if (doesElementAlreadyExist) {
+        return [ ...prevElements ];
+      } else {
+        return [ ...prevElements, transferedElement ];
+      }
     });
     //Reset transfered element
     setTransferedElement(null);
