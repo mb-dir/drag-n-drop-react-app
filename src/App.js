@@ -3,6 +3,11 @@ import "./App.css";
 import data from "./data.js";
 
 function App() {
+  //In my approach to problem of styling currently drag element "isCurrentlyDrag" property is so useful, based on this the speciall css class is added, so I add this property "manually" - I assume that in real project we have no influence when it comes to data structure
+  data.elements.map(el => {
+    el.isCurrentlyDrag = false;
+  });
+
   const [ stData, setStData ] = React.useState(data.elements);
   const [ ndData, setNdData ] = React.useState([]);
   const [ transferedElement, setTransferedElement ] = React.useState(null);
