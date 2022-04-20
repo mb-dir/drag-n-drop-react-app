@@ -28,6 +28,33 @@ function App() {
 
   function getDraggedElement(el) {
     setTransferedElement(el);
+
+    //Change isCurrentlyDrag on currently drag element in order to "highlight" this element using css
+    setStData(prevData => {
+      return prevData.map(item => {
+        return el.id === item.id ? { ...item, isCurrentlyDrag: true } : item;
+      });
+    });
+    setNdData(prevData => {
+      return prevData.map(item => {
+        return el.id === item.id ? { ...item, isCurrentlyDrag: true } : item;
+      });
+    });
+  }
+  function resetDraggedElement() {
+    setTransferedElement(null);
+
+    //Change isCurrentlyDrag on currently drag element in order to  stop "highlighting" this element
+    setStData(prevData => {
+      return prevData.map(item => {
+        return { ...item, isCurrentlyDrag: false };
+      });
+    });
+    setNdData(prevData => {
+      return prevData.map(item => {
+        return { ...item, isCurrentlyDrag: false };
+      });
+    });
   }
 
   function transferToNd() {
