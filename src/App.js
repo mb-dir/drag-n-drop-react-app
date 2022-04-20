@@ -110,7 +110,10 @@ function App() {
       <div
         key={el.id}
         draggable="true"
-        className="element"
+        className={`element ${el.isCurrentlyDrag
+          ? "element--transparency"
+          : ""}`}
+        onDragEnd={resetDraggedElement}
         onDragStart={() => getDraggedElement(el)}
       >
         <h3 className="element__title">{el.title}</h3>
@@ -125,7 +128,10 @@ function App() {
       <div
         key={el.id}
         draggable="true"
-        className="element"
+        className={`element ${el.isCurrentlyDrag
+          ? "element--transparency"
+          : ""}`}
+        onDragEnd={resetDraggedElement}
         onDragStart={() => getDraggedElement(el)}
       >
         <h3 className="element__title">{el.title}</h3>
